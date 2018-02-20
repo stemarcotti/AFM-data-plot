@@ -57,14 +57,20 @@ for i = 1:size(D_cell_filename,1)   % open file (name order)
 
     % 2c_ plot
     figure('Visible','off') % remove arguments if rendering on screen is required
-    plot(height_E, force_E, height_R, force_R)
+    plot(height_E, force_E, height_R, force_R, 'linewidth', 2)
     xlabel('Height [nm]')
     ylabel('Force [pN]')
-    grid on
+    title(myfilename)
+    legend('Extend','Retract')
+    grid on   % set major grid
+    box off   % remove box (top and right)
+    ax = gca;
+    ax.GridLineStyle = ':'; % change grid line style to points
+    set(gca,'FontSize',12)  % set the font size to 12 pt.
 
     % 2d_ save figure in output folder
     cd(output_folder);
-    myplotname = sprintf('Figure%d', i);
+    myplotname = sprintf('Figure %d', i);
     print(myplotname,'-dpng')
 
 end
